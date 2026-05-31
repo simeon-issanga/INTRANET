@@ -1,7 +1,7 @@
 services:
   bdd:
     image: postgres:18.4
-    container-name: bdd-intranet
+    container_name: bdd-intranet
     environment:
       POSTGRES_PASSWORD: example
     volumes:
@@ -11,6 +11,7 @@ services:
 
   adminer:
     image: adminer
+    container_name: adminer-intranet
     restart: always
     ports:
       - 8080:8080
