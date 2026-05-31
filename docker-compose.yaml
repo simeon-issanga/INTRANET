@@ -1,1 +1,25 @@
 services:
+  bdd:
+    image: postgres:18.4
+    container-name: bdd-intranet
+    environment:
+      POSTGRES_PASSWORD: example
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - intranet
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+    depends_on:
+      - bdds
+    networks:
+      - intranet
+volumes:
+  db_data: {}
+
+networks:
+  intranet: {}
