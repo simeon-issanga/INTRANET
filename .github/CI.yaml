@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]                  
+
+jobs:
+  verif-projet:
+    
+    runs-on: ubuntu-latest  
+    
+    steps:
+    - name: vérif code
+      uses: actions/checkout@v4
+
+    - name: Build test Docker
+      run: docker build -t intranet-app ./intranet
+
+    - name: Resultat
+      run: echo "CI terminée"
+     

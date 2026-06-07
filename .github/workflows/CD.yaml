@@ -1,0 +1,41 @@
+name: CD
+on :
+  workflow_run:
+    workflows: ["CI"]
+    types:
+      - completed
+    branches: [main]
+  
+jobs:
+  deploy:
+    name: Deploiement serveur
+
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    runs-on: self-hosted
+    steps:
+    - name: récup code
+      uses: actions/checkout@v4
+
+# à décommenter lors de création des mots de passes .env
+
+#    - name: Crée dossier config et fichier .env
+#        run: |
+#          mkdir -p config/env
+#          echo "${{ secrets.ENV_FILE_CONTENT }}" > config/env/.env
+#          chmod 600 config/env/.env
+
+
+    - uses: dorny/paths-filter@v3
+      id: changes
+      with:
+        filters: |
+          frontend:
+            - 'intranet/**'
+    
+    - name: recompose frontend
+      if: steps.changes.outputs.frontend == 'true'
+      run: |
+        docker compose up --build -d next-app
+    
+    - name: Nettoyage des vieilles images
+      run: docker image prune -f
