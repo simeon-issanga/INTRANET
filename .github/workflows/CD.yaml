@@ -35,7 +35,10 @@ jobs:
     - name: recompose frontend
       if: steps.changes.outputs.frontend == 'true'
       run: |
-        docker compose build --build-arg HTTP_PROXY=http://cache.univ-pau.fr:3128 next-app
+        docker compose build \
+          --build-arg HTTP_PROXY=http://cache.univ-pau.fr:3128 \
+          --build-arg HTTPS_PROXY=http://cache.univ-pau.fr:3128 \
+          next-app
         docker compose up -d next-app
     
     - name: Nettoyage des vieilles images

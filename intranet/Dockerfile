@@ -3,8 +3,8 @@ FROM node:current-alpine3.23
 ARG HTTP_PROXY
 ARG HTTPS_PROXY
 
-ENV http_proxy="http://cache.univ-pau.fr:3128"
-ENV https_proxy="http://cache.univ-pau.fr:3128"
+ENV http_proxy=$HTTP_PROXY
+ENV https_proxy=$HTTPS_PROXY
 
 WORKDIR /app
 
