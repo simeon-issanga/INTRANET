@@ -1,5 +1,6 @@
 FROM node:current-alpine3.23
-
+ENV http_proxy="http://cache.univ-pau.fr:3128"
+ENV https_proxy="http://cache.univ-pau.fr:3128"
 WORKDIR /app
 
 # On copie tout le projet d'un coup
