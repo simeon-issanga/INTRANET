@@ -1,4 +1,19 @@
 services:
+  next-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: nextjs_standalone
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - bdd
+    networks:
+      - intranet
+
   bdd:
     image: postgres:16-alpine
     container_name: bdd-intranet
@@ -21,6 +36,7 @@ services:
       - bdd
     networks:
       - intranet
+
 volumes:
   db_data: {}
 
