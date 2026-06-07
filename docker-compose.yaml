@@ -1,7 +1,7 @@
 services:
   next-app:
     build:
-      context: .
+      context: ./intranet/.
       dockerfile: Dockerfile
     container_name: nextjs_standalone
     restart: always
