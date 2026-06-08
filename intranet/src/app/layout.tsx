@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import Header from "../common/components/header/page";
+import ILink from "../common/types/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -22,12 +24,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const tab : ILink[]= [{"name": "Accueil", "href": "/"},{"name": "Tableau de bord", "href": "/"},{"name": "Cours", "href": "/"},{"name": "Forum", "href": "/"} , {"name": "Evenelent", "href": "/"} , {"name": "Message", "href": "/"} ];
   return (
     <html
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body className="min-h-full flex flex-col">
+        <Header props={tab}></Header>
+        {children}
+      </body>
     </html>
   );
 }
