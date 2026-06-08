@@ -10,12 +10,12 @@ const Header = ({ props }: { props: ILink[] }) => {
   const pathname = usePathname();
 
   return (
-    <nav className="flex flex-row w-full justify-between items-center p-4 border-b bg-red-300">
+    <header className="flex flex-row w-full justify-between items-center p-4 border-b bg-gray-700">
       <div className="font-bold">
         <Link href="/">MON LOGO</Link>
       </div>
 
-      <div className="flex gap-2">
+      <div className="flex items-center gap-3">
         {props.map((item, index) => {
           const isActive = pathname.startsWith(item.href);
           return (
@@ -41,7 +41,7 @@ const Header = ({ props }: { props: ILink[] }) => {
         </DropdownMenuContent>
     </DropdownMenu>
     </div>
-    
+
     <DropdownMenu>
         <DropdownMenuTrigger asChild>
             <Button variant="outline">Profile</Button>
@@ -53,7 +53,7 @@ const Header = ({ props }: { props: ILink[] }) => {
             </DropdownMenuGroup>
         </DropdownMenuContent>
     </DropdownMenu>
-    </nav>
+    </header>
   );
 };
 
